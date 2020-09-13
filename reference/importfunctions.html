@@ -233,8 +233,7 @@ parameter does not apply to how the <code>.into</code> parameter is handled).</p
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a reference to the environment with the imports or <code>NULL</code>
-  if <code>into = ""</code>, invisibly.</p>
+    <p>a reference to the environment containing the imported objects.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The function arguments can be quoted or unquoted as with e.g. <code>library</code>.
@@ -271,10 +270,19 @@ add a requirement in parentheses to the package name (which then needs to
 be quoted), e.g <code>import::from("parallel (&gt;= 3.2.0)", ...)</code>.
 You can use the operators <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>,
 <code><a href='https://rdrr.io/r/base/Comparison.html'>==</a></code>, <code><a href='https://rdrr.io/r/base/Comparison.html'>!=</a></code>. Whitespace in the specification is irrelevant.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Helpful links:</p><ul>
+<li><p><a href='https://import.rticulate.org'>https://import.rticulate.org</a></p></li>
+<li><p><a href='https://github.com/rticulate/import'>https://github.com/rticulate/import</a></p></li>
+<li><p><a href='https://github.com/rticulate/import/issues'>https://github.com/rticulate/import/issues</a></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>import</span>::<span class='fu'>from</span>(<span class='kw'>parallel</span>, <span class='kw'>makeCluster</span>, <span class='kw'>parLapply</span>)
 <span class='kw'>import</span>::<span class='fu'>into</span>(<span class='st'>"imports:parallel"</span>, <span class='kw'>makeCluster</span>, <span class='kw'>parLapply</span>, .from = <span class='kw'>parallel</span>)
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
