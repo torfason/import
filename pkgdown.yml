@@ -3,5 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   import: import.html
-last_built: 2020-09-13T10:08Z
+  sequence_module: sequence_module.html
+last_built: 2020-09-13T10:52Z
 
