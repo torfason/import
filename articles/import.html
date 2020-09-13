@@ -172,7 +172,7 @@
 <a href="#importing-functions-from-module-scripts" class="anchor"></a>Importing Functions from “Module” Scripts</h3>
 <p>The <code>import</code> package allows for importing objects defined in script files, which we will here refer to as “modules”. The module will be fully evaluated by <code>import</code> when an import is requested, after which objects such as functions or data can be imported. Such modules should be side-effect free, but this is not enforced.</p>
 <p>Attachments are detached (e.g. packages attached by <code>library</code>) but loaded namespaces remain loaded. This means that <em>values</em> created by functions in an attached namespace will work with <code>import</code>, but functions to be exported <em>should not</em> rely on such functions (use function importing in the modules instead).</p>
-<p>For example, the file <a href="https://raw.githubusercontent.com/torfason/import/docs/man/examples/sequence_module.R">sequence_module.R</a> contains several functions calculating terms of mathematical sequences. It is possible to import from such files, just as one imports from packages:</p>
+<p>For example, the file <a href="https://raw.githubusercontent.com/rticulate/import/master/man/examples/sequence_module.R">sequence_module.R</a> contains several functions calculating terms of mathematical sequences. It is possible to import from such files, just as one imports from packages:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw">import</span>::<span class="fu"><a href="../reference/from.html">from</a></span>(<span class="kw">sequence_module.R</span>, <span class="kw">fibonacci</span>, <span class="kw">square</span>, <span class="kw">triangular</span>)
 </pre></div>
@@ -181,7 +181,7 @@
 <span class="kw">import</span>::<span class="fu"><a href="../reference/from.html">from</a></span>(<span class="kw">sequence_module.R</span>, fib=<span class="kw">fibonacci</span>, .except=<span class="st">"square"</span>)
 </pre></div>
 <p>If a module is modified, <code>import</code> will realize this and reload the script if further imports are executed or re-executed; otherwise additional imports will not cause the script to be reloaded for efficiency. As the script is loaded in its own environment (maintained by <code>import</code>) dependencies are kept (except those exposed through attachment), as the following small example shows.</p>
-<p><strong>Contents of “<a href="https://raw.githubusercontent.com/torfason/import/docs/man/examples/some_module.R">some_module.R</a>”:</strong></p>
+<p><strong>Contents of “<a href="https://raw.githubusercontent.com/rticulate/import/master/man/examples/some_module.R">some_module.R</a>”:</strong></p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="co">## Do not use library() inside a module. This results in a warning, </span>
 <span class="co">## and functions relying on ggplot2 will not work.</span>
@@ -347,9 +347,9 @@
 <div id="importing-from-a-url" class="section level2">
 <h2 class="hasAnchor">
 <a href="#importing-from-a-url" class="anchor"></a>Importing from a URL</h2>
-<p>Another case where <code>.character_only</code> comes in handy is when one wants to import some functions from a URL. While <code>import</code> does not allow direct importing from a URL (because of difficult questions about when a URL target has changes, whether to download a file and other things), it easy to achieve the desired result by using the <code>pins</code> package (whose raison d’etre is to resolve such difficult questions). A simple example follows, which directly imports the <code>myfunc()</code> function, which is defined in the <a href="https://raw.githubusercontent.com/torfason/import/docs/man/examples/plusone_module.R">plusone_module.R</a>:</p>
+<p>Another case where <code>.character_only</code> comes in handy is when one wants to import some functions from a URL. While <code>import</code> does not allow direct importing from a URL (because of difficult questions about when a URL target has changes, whether to download a file and other things), it easy to achieve the desired result by using the <code>pins</code> package (whose raison d’etre is to resolve such difficult questions). A simple example follows, which directly imports the <code>myfunc()</code> function, which is defined in the <a href="https://raw.githubusercontent.com/rticulate/import/master/man/examples/plusone_module.R">plusone_module.R</a>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="kw">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/torfason/import/docs/man/examples/plusone_module.R"</span>
+<span class="kw">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/rticulate/import/master/man/examples/plusone_module.R"</span>
 <span class="kw">import</span>::<span class="fu"><a href="../reference/from.html">from</a></span>(<span class="kw">pins</span>::<span class="fu">pin</span>(<span class="kw">url</span>), <span class="st">"myfunc"</span>, .character_only=<span class="fl">TRUE</span>)
 <span class="fu">myfunc</span>(<span class="fl">3</span>)
 <span class="co">#&gt; [1] 4</span>

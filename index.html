@@ -133,7 +133,7 @@
 <div id="importing-functions-from-module-scripts" class="section level3">
 <h3 class="hasAnchor">
 <a href="#importing-functions-from-module-scripts" class="anchor"></a>Importing Functions from “Module” Scripts</h3>
-<p>The <code>import</code> package allows R files to be used as “modules” from which functions are loaded. For example, the file <a href="https://raw.githubusercontent.com/torfason/import/docs/man/examples/sequence_module.R">sequence_module.R</a> contains several functions calculating terms of mathematical sequences. It is possible to import from such files, just as one imports from packages:</p>
+<p>The <code>import</code> package allows R files to be used as “modules” from which functions are loaded. For example, the file <a href="https://raw.githubusercontent.com/rticulate/import/master/man/examples/sequence_module.R">sequence_module.R</a> contains several functions calculating terms of mathematical sequences. It is possible to import from such files, just as one imports from packages:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">from</a></span>(<span class="kw">sequence_module.R</span>, <span class="kw">fibonacci</span>, <span class="kw">square</span>, <span class="kw">triangular</span>)
 </pre></div>
@@ -152,7 +152,7 @@
 <div id="choosing-where-the-imported-functions-are-placed" class="section level3">
 <h3 class="hasAnchor">
 <a href="#choosing-where-the-imported-functions-are-placed" class="anchor"></a>Choosing where the imported functions are placed</h3>
-<p>One can also specify which names to use in the search path and use several to group imports:</p>
+<p>By default, imported objects are placed in a separate entity in the search path called “imports” (@lionel- suggests naming such entities “pied-à-terres”, meaning living units some distance away from primary residence). One can also specify which names to use in the search path and use several to group imports:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">from</a></span>(<span class="kw">magrittr</span>, <span class="st">"%&gt;%"</span>, <span class="st">"%$%"</span>, .into = <span class="st">"operators"</span>) 
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">from</a></span>(<span class="kw">dplyr</span>, <span class="kw">arrange</span>, .into = <span class="st">"datatools"</span>)
