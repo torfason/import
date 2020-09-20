@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">import</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -52,6 +52,9 @@
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -80,7 +83,7 @@
 <div id="an-import-mechanism-for-r" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#an-import-mechanism-for-r" class="anchor"></a>An Import Mechanism For R</h1></div>
-<p>The import package is intended to simplify the way in which functions from external packages or modules are made available for use in R scripts. Learn more on the <a href="https://import.rticulate.org/">package website</a>, by reading<br><a href="https://import.rticulate.org/articles/import.html"><code>vignette("import")</code></a>, or using the help (<code><a href="reference/from.html">?import::from</a></code>).</p>
+<p>The import package is intended to simplify the way in which functions from external packages or modules are made available for use in R scripts. Learn more on the <a href="https://import.rticulate.org/">package website</a>, by reading <a href="https://import.rticulate.org/articles/import.html"><code>vignette("import")</code></a>, or using the help (<code><a href="reference/from.html">?import::from</a></code>).</p>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -147,17 +150,17 @@
 <h3 class="hasAnchor">
 <a href="#choosing-where-import-looks-for-packages-or-modules" class="anchor"></a>Choosing where import looks for packages or modules</h3>
 <p>The <code>import</code> package will by default only use the latest specified library (i.e. the result of <code>.libPaths()[1L]</code>). It is possible to specify a different library using the <code>.library</code> argument in any of the <code>import</code> functions. One import call can only use <em>one</em> library so there will not be ambiguity as to where imports come from.</p>
-<p>When importing from a module (.R file), the directory where <code>import</code> looks for the module script can be speecified with the with <code>.directory</code> paremeter. The default is <code>.</code> (the current working directory).</p>
+<p>When importing from a module (.R file), the directory where <code>import</code> looks for the module script can be specified with the with <code>.directory</code> parameter. The default is <code>.</code> (the current working directory).</p>
 </div>
 <div id="choosing-where-the-imported-functions-are-placed" class="section level3">
 <h3 class="hasAnchor">
 <a href="#choosing-where-the-imported-functions-are-placed" class="anchor"></a>Choosing where the imported functions are placed</h3>
-<p>By default, imported objects are placed in a separate entity in the search path called “imports” (@lionel- suggests naming such entities “pied-à-terres”, meaning living units some distance away from primary residence). One can also specify which names to use in the search path and use several to group imports:</p>
+<p>By default, imported objects are placed in a separate entity in the search path called “imports”. One can also specify which names to use in the search path and use several to group imports:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">from</a></span>(<span class="kw">magrittr</span>, <span class="st">"%&gt;%"</span>, <span class="st">"%$%"</span>, .into = <span class="st">"operators"</span>) 
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">from</a></span>(<span class="kw">dplyr</span>, <span class="kw">arrange</span>, .into = <span class="st">"datatools"</span>)
 </pre></div>
-<p>If using pied-à-terres actively, one might prefer the alternative syntax (which does the same but reverses the argument order):</p>
+<p>If using custom search path entities actively, one might prefer the alternative syntax (which does the same but reverses the argument order):</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">into</a></span>(<span class="st">"operators"</span>, <span class="st">"%&gt;%"</span>, <span class="st">"%$%"</span>, .from = <span class="kw">magrittr</span>)
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">into</a></span>(<span class="st">"datatools"</span>, <span class="kw">arrange</span>, .from = <span class="kw">dplyr</span>)
@@ -177,7 +180,7 @@
 <span class="co"># This will correctly import the foo() and bar() functions from "../utils/my_module.R"</span>
 <span class="kw">import</span>::<span class="fu"><a href="reference/from.html">from</a></span>(<span class="kw">module_name</span>, <span class="kw">foo</span>, <span class="kw">bar</span>, .character_only=<span class="fl">TRUE</span>)
 </pre></div>
-<p>The <code>.character_only</code> parameter is covered in more detail in the <a href="articles/import.html#advanced-usage">Advanced Usage</a> section of the package vignette, which also describes how you can import from module scripts stored online with the help of the <code>pins</code> package, or achieve python-like imports with the help of <code>{}</code> notation for environments in the <code>.into</code> pareter.</p>
+<p>The <code>.character_only</code> parameter is covered in more detail in the <a href="articles/import.html#advanced-usage">Advanced Usage</a> section of the package vignette, which also describes how you can import from module scripts stored online with the help of the <code>pins</code> package, or achieve python-like imports with the help of <code>{}</code> notation for environments in the <code>.into</code> parameter.</p>
 </div>
 </div>
 </div>

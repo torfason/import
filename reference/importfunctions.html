@@ -81,7 +81,7 @@ desired. The function import::here imports into the current environment." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">import</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.9007</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -98,6 +98,9 @@ desired. The function import::here imports into the current environment." />
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -250,7 +253,7 @@ of altering the search path, as they (by default) import objects into the
 "imports" search path entry rather than the global environment.</p>
 <p>The <code>import</code> package is not meant to be loaded with <code>library</code> (and
 will output a message about this if attached), but rather it is named to make
-the function calls expressive without the need to preload, i.e. it is
+the function calls expressive without the need to loading before use, i.e. it is
 designed to be used explicitly with the <code><a href='https://rdrr.io/r/base/ns-dblcolon.html'>::</a></code> syntax, e.g.
 <code>import::from(pkg, x, y)</code>.</p>
     <h2 class="hasAnchor" id="packages-vs-modules"><a class="anchor" href="#packages-vs-modules"></a>Packages vs. modules</h2>
