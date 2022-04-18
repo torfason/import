@@ -14,6 +14,9 @@ print(getwd())
 # (we do not use import::from because then the script would clean itself up)
 source("cleanup_environment.R")
 
+# Create temporary directory for installing test package
+tmp_install_dir <<- tempdir()
+
 ## IMPORTANT:
 ## Remember to run the cleanup script after each test sequence with:
 ## > cleanup_environment()
@@ -29,27 +32,56 @@ test_that("Imports from libraries work", {
   cleanup_environment()
 })
 
-test_that("Imports from libraries NOT defined in .libPaths work", {
-  tmp_install_dir = tempdir()
-  if (!file.exists('packageToTest_0.1.0.tar.gz')) {
-    system("R CMD build packageToTest")
-  }
-  install.packages('packageToTest_0.1.0.tar.gz',
-                   lib = tmp_install_dir,
-                   repos = NULL,
-                   type = 'source',
-                   quiet = TRUE)
-  expect_true( 'packageToTest' %in% list.files(tmp_install_dir) )
-  expect_silent( import::from(.from = packageToTest, .library = tmp_install_dir, hello) )
-  expect_equal(hello(), "Hello, world!")
-})
-
 test_that("Imports from modules work", {
   expect_error ( fun1() )
   expect_silent( import::from(module_base.R, fun1) )
   expect_equal ( fun1(), "fun1" )
   cleanup_environment()
 })
+
+test_that("Imports from libraries NOT defined in .libPaths work", {
+  if (!file.exists("packageToTest_0.1.0.tar.gz")) {
+    system("R CMD build packageToTest")
+  }
+  install.packages("packageToTest_0.1.0.tar.gz",
+    lib = tmp_install_dir,
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  )
+  expect_true("packageToTest" %in% list.files(tmp_install_dir))
+  expect_silent(import::from(.from = packageToTest, .library = tmp_install_dir, hello))
+  expect_equal(hello(), "Hello, world!")
+})
+
+test_that("Functions named `get` in the calling environment do not mask base::get", {
+  get <- function(...) stop("import incorrectly used function `get` defined in calling env.")
+  expect_silent(import::from(module_base.R, fun1))
+  expect_silent(import::from(knitr, normal_print))
+  cleanup_environment()
+})
+
+test_that("Functions named `get` in arbitrary environment on search path do not mask base::get", {
+  attach(what = new.env(parent = emptyenv()), pos = 2, name = "custom")
+  assign(x = "get", value = function(...) stop("import incorrectly used function `get` defined in custom env on search path."), pos = "custom")
+  expect_silent(import::from(module_base.R, fun1))
+  expect_silent(import::from(knitr, normal_print))
+  cleanup_environment()
+})
+
+# Ensure that `custom` is unloaded if test does not pass; execution of the body stops when test fails.
+detach("custom")
+
+test_that("Functions named `get` exported from packages do not mask base::get", {
+  library(packageToTest, lib.loc = tmp_install_dir)
+  expect_true("get" %in% getNamespaceExports("packageToTest"))
+  expect_silent(import::from(module_base.R, fun1))
+  expect_silent(import::from(knitr, normal_print))
+  cleanup_environment()
+})
+
+# Ensure that `packageToTest` is unloaded if test does not pass; execution of the body stops when test fails.
+detach("package:packageToTest", unload = TRUE)
 
 test_that("Passing values as characters works", {
   char_package   <- "knitr"
